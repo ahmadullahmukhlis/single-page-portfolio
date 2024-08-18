@@ -1,5 +1,9 @@
 import { Inter } from "next/font/google";
-import "./globals.css";
+import Head from "next/head";
+import "./globals.css"; // Ensure this path is correct
+import Script from "next/script";
+import Profile from "@/components/Profile";
+import Navbar from "@/components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,7 +15,171 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <Head>
+        <link
+          rel="shortcut icon"
+          href="/assets/img/user-sidebar-thumb.png"
+          sizes="any"
+        />
+
+        {/* Google Fonts */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="true"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+
+        {/* External CSS Files */}
+        <link rel="stylesheet" href="/assets/styles/fontAwesome5Pro.css" />
+        <link rel="stylesheet" href="/assets/styles/cdheadline.css" />
+        <link rel="stylesheet" href="/assets/styles/swiper-bundle.min.css" />
+        <link rel="stylesheet" href="/assets/styles/style.min.css" />
+      </Head>
+
+      <body className="relative custom_cursor">
+        {/* Custom Cursor Start */}
+        <div className="custom_cursor_one fixed top-0 left-0 w-8 h-8 border border-gray-400 rounded-full pointer-events-none"></div>
+        <div className="custom_cursor_two w-1 h-1 rounded-full border border-gray-400 bg-metborder-gray-400 fixed pointer-events-none left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+        {/* Custom Cursor End */}
+
+        {/* App Preloader Start */}
+        <div id="preloader">
+          <div className="loader_line"></div>
+          <div className="absolute w-20 h-20 transition-all delay-300 -translate-x-1/2 -translate-y-1/2 rounded-full logo top-1/2 left-1/2 bg-nightBlack border-greyBlack flex-center">
+            <img src="/assets/img/site-logo.svg" alt="Minfo" />
+          </div>
+        </div>
+        {/* App Preloader End */}
+
+        {/* App Start */}
+        <div className="relative pt-10 minfo__app max-xl:pt-20">
+          <div className="menu-overlay fixed top-0 left-0 w-full h-full bg-black/60 transition-all duration-200 z-999 opacity-0 invisible is-menu-open:visible is-menu-open:opacity-100"></div>
+          <div className="max-lg:px-4">
+            {/* Mobile Menu Bar Start */}
+            <div className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-2 px-3 bg-white/10 mobile-menu-bar sm:px-6 backdrop-blur-md xl:hidden">
+              <div className="text-lg font-medium name">
+                <a
+                  href="index.html"
+                  className="flex items-center gap-2 text-black dark:text-white"
+                >
+                  <img src="/assets/img/site-logo.svg" alt="Minfo" />
+                  <span>Minfo</span>
+                </a>
+              </div>
+              {/* Mobile Hamburger Menu Start */}
+              <button
+                className="w-12 h-12 border rounded-full hamburger menu_toggle bg-white dark:bg-nightBlack border-platinum dark:border-greyBlack flex-center"
+                type="button"
+                aria-label="Open Mobile Menu"
+              >
+                <svg
+                  viewBox="0 0 20 12"
+                  className="w-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M5.33333 11.3333C5.33333 11.1565 5.40357 10.987 5.5286 10.8619C5.65362 10.7369 5.82319 10.6667 6 10.6667H19.3333C19.5101 10.6667 19.6797 10.7369 19.8047 10.8619C19.9298 10.987 20 11.1565 20 11.3333C20 11.5101 19.9298 11.6797 19.8047 11.8047C19.6797 11.9298 19.5101 12 19.3333 12H6C5.82319 12 5.65362 11.9298 5.5286 11.8047C5.40357 11.6797 5.33333 11.5101 5.33333 11.3333ZM2.66667 6C2.66667 5.82319 2.7369 5.65362 2.86193 5.5286C2.98695 5.40357 3.15652 5.33333 3.33333 5.33333H16.6667C16.8435 5.33333 17.013 5.40357 17.1381 5.5286C17.2631 5.65362 17.3333 5.82319 17.3333 6C17.3333 6.17681 17.2631 6.34638 17.1381 6.4714C17.013 6.59643 16.8435 6.66667 16.6667 6.66667H3.33333C3.15652 6.66667 2.98695 6.59643 2.86193 6.4714C2.7369 6.34638 2.66667 6.17681 2.66667 6ZM0 0.666667C0 0.489856 0.0702379 0.320287 0.195262 0.195262C0.320286 0.070238 0.489856 0 0.666667 0H14C14.1768 0 14.3464 0.070238 14.4714 0.195262C14.5964 0.320287 14.6667 0.489856 14.6667 0.666667C14.6667 0.843478 14.5964 1.01305 14.4714 1.13807C14.3464 1.2631 14.1768 1.33333 14 1.33333H0.666667C0.489856 1.33333 0.320286 1.2631 0.195262 1.13807C0.0702379 1.01305 0 0.843478 0 0.666667Z"
+                    className="fill-theme dark:fill-white"
+                  />
+                </svg>
+              </button>
+              {/* Mobile Hamburger Menu End */}
+            </div>
+            {/* Mobile Menu Bar End */}
+
+            <Profile />
+            <Navbar />
+
+            {children}
+
+            {/* Footer Start */}
+            <footer className="mx-auto minfo__contentBox max-w-container xl:max-2xl:max-w-65rem">
+              <div className="footer-container text-center py-6 max-w-content xl:max-2xl:max-w-50rem max-xl:mx-auto xl:ml-auto">
+                <p>
+                  Copyright by
+                  <a href="#" className="transition-colors">
+                    @domain.com
+                  </a>
+                </p>
+              </div>
+            </footer>
+            {/* Footer End */}
+          </div>
+        </div>
+        {/* App End */}
+
+        {/* Background Line and Animation */}
+        <div className="bg-lines fixed inset-0 -z-1 md:max-xl:max-w-[45rem] xl:max-w-60rem 2xl:max-w-container mx-auto max-sm:px-8 sm:max-xl:px-12">
+          <div className="line-wrapper max-w-[1130px] w-full h-full ml-auto 2xl:-mr-24 relative flex justify-between *:w-px *:h-full *:border-r *:border-dashed *:border-slate-300 dark:*:border-metalBlack *:relative *:before:absolute *:before:bg-theme *:before:rotate-45 *:before:-left-1 *:before:w-2 *:before:h-2">
+            <div className="line1 before:animate-top_bottom"></div>
+            <div className="line2 before:bottom-0 before:animate-bottom_top before:animate-delay-3s"></div>
+            <div className="line3 before:animate-top_bottom before:animate-delay-3s"></div>
+            <div className="line4 before:bottom-0 before:animate-bottom_top before:animate-delay-2s"></div>
+          </div>
+        </div>
+        {/* Ends Here */}
+
+        {/* Style Switcher Started */}
+        <div className="style-switcher fixed right-0 top-1/2 -translate-y-1/2 translate-x-[15rem] w-[15rem] active:translate-x-0 transition z-[9999]">
+          <div className="toggle-btn absolute -left-15 w-15 h-15 bg-white dark:bg-nightBlack text-black dark:text-white flex-center cursor-pointer rounded-[.5rem_0_0_.5rem] select-none shadow-sm shadow-slate-400">
+            <span className="fal fa-cog fa-spin"></span>
+          </div>
+
+          <div className="theme-select shadow-sm shadow-slate-400 px-6 py-4 bg-white dark:bg-nightBlack rounded-[0_0_0_.5rem]">
+            <h5 className="font-medium mb-2 !text-black dark:!text-white text-lg">
+              Theme Mode
+            </h5>
+
+            <div className="flex items-center justify-between gap-4">
+              <div
+                className="switcher-input rounded-lg text-xl flex-[1] text-center transition cursor-pointer"
+                data-theme="dark"
+              >
+                <button
+                  className="border w-full px-4 py-4 flex flex-col gap-1 justify-center items-center active:bg-flashWhite active:text-black dark:text-white rounded-md"
+                  id="dark_theme"
+                  title="Active Dark Theme"
+                >
+                  <i className="fal fa-moon"></i>
+                </button>
+              </div>
+              <div
+                className="switcher-input rounded-lg text-lg flex-[1] text-center transition cursor-pointer"
+                data-theme="light"
+              >
+                <button
+                  className="border w-full px-4 py-4 flex flex-col gap-1 justify-center items-center active:bg-flashWhite active:text-black dark:text-white rounded-md"
+                  id="light_theme"
+                  title="Active Light Theme"
+                >
+                  <i className="fal fa-sun"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* Style Switcher End */}
+
+        {/* JS Library Start */}
+        <Script src="/assets/js/jquery-3.6.0.min.js"></Script>
+        <Script src="/assets/js/waypoints.min.js"></Script>
+        <Script src="/assets/js/tw-elements.umd.min.js"></Script>
+        <Script src="/assets/js/cd-headline.js"></Script>
+        <Script src="/assets/js/jquery.counterup.min.js"></Script>
+        <Script src="/assets/js/swiper-bundle.min.js"></Script>
+        <Script src="/assets/js/scrollIt.min.js"></Script>
+        <Script src="/assets/js/circle-progress.min.js"></Script>
+        <Script src="/assets/js/script.js"></Script>
+        <Script src="/assets/js/theme-mode.js"></Script>
+        {/* JS Library End */}
+      </body>
     </html>
   );
 }
